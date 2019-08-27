@@ -3,7 +3,6 @@
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns:tei="http://www.tei-c.org/ns/1.0"
    version="1.0">
-  
 <!--
     An XSLT 1.0 stylesheet which creates HTML5 Custom Elements from an XML document.
     The resulting HTML uses CETEIcean for display.
@@ -15,6 +14,15 @@
   <xsl:output method="html" encoding="UTF-8"/>
   
   <!--  PARAMETERS  -->
+  
+  <!-- The path to the directory where the web assets (CSS, JS, etc.) are stored. By 
+    default, this stylesheet assumes that web assets are stored in the same 
+    directory as the XML file. -->
+  <xsl:param name="assets-path" select="'.'"/>
+  
+  <!-- The title of the HTML document, which will be displayed as the name of the 
+    tab or window. By default, this stylesheet will try to use the TEI <title> in 
+    the <titleStmt>. -->
   <xsl:param name="document-title">
     <xsl:variable name="teiTitle" 
       select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[1]"/>
@@ -35,8 +43,11 @@
     <html lang="en">
       <head>
         <title><xsl:value-of select="$document-title"/></title>
-        <script type="application/javascript" src="../../Downloads/CETEI.js"/>
-        <link rel="stylesheet" href="test/CETEIcean.css" />
+        <!-- WEB ASSETS GO HERE -->
+        <script type="application/javascript" src="{$assets-path}/CETEI.js"/>
+        <link rel="stylesheet" href="{$assets-path}/CETEIcean.css" />
+        <link rel="stylesheet" href="custom.css"/>
+        <!-- END WEB ASSETS -->
       </head>
       <body>
         <div id="TEI">
@@ -45,7 +56,6 @@
         <script><xsl:text>
           var xmlDoc = document.getElementById('TEI'),
               CETEIcean = new CETEI(xmlDoc);
-          console.log(xmlDoc);
         </xsl:text></script>
       </body>
     </html>
