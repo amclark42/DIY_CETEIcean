@@ -18,7 +18,7 @@ var ceteiceanBehaviors = {
                 allNotes = document.querySelectorAll('tei-note'),
                 noteIndex;
             /* Get the index of the current note among others of its type. */
-            for (var index = 0; index < allNotes.length; i++) {
+            for (var index = 0; index < allNotes.length; index++) {
               if ( allNotes[index].isEqualNode(elt) ) {
                 /* JS has zero-based indexes; add one for humans. */
                 noteIndex = index + 1;
