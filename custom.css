@@ -1,0 +1,8 @@
+/* Place project-specific CSS here */
+.link-to-note {}
+.link-from-note {
+  float: left;
+  margin-left: 0.25em;
+  margin-right: 0.5em;
+  font-size: 0.95em;
+}

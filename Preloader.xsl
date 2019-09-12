@@ -11,7 +11,7 @@
     2019-08-27
   -->
   
-  <xsl:output method="html" encoding="UTF-8"/>
+  <xsl:output method="html" encoding="UTF-8" indent="no"/>
   
   <!--  PARAMETERS  -->
   
@@ -45,8 +45,9 @@
         <title><xsl:value-of select="$document-title"/></title>
         <!-- WEB ASSETS GO HERE -->
         <script type="application/javascript" src="{$assets-path}/CETEI.js"/>
+        <script type="application/javascript" src="{$assets-path}/behaviors.js" />
         <link rel="stylesheet" href="{$assets-path}/CETEIcean.css" />
-        <link rel="stylesheet" href="custom.css"/>
+        <link rel="stylesheet" href="{$assets-path}/custom.css"/>
         <!-- END WEB ASSETS -->
       </head>
       <body>
@@ -55,7 +56,14 @@
         </div>
         <script><xsl:text>
           var xmlDoc = document.getElementById('TEI'),
-              CETEIcean = new CETEI(xmlDoc);
+              CETEIcean = new CETEI(xmlDoc),
+              xsltEls = new Set(</xsl:text><xsl:value-of select="$els"/><xsl:text>);
+          if ( ceteiceanBehaviors !== undefined ) {
+            CETEIcean.addBehaviors(ceteiceanBehaviors);
+            CETEIcean.applyBehaviors();
+          }
+          CETEIcean.define(xsltEls);
+          console.log(document.querySelector('tei-TEI') instanceof HTMLElement);
         </xsl:text></script>
       </body>
     </html>
@@ -72,5 +80,19 @@
   </xsl:template>
   
   <xsl:template match="processing-instruction()"/>
+  
+  <xsl:template match="@xml:id">
+    <xsl:copy-of select="."/>
+    <xsl:attribute name="id">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
+  </xsl:template>
+
+  <xsl:template match="@xml:lang">
+    <xsl:copy-of select="."/>
+    <xsl:attribute name="lang">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
+  </xsl:template>
   
 </xsl:stylesheet>
