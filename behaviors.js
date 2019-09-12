@@ -2,6 +2,8 @@
 
 var ceteiceanBehaviors = {
   'handlers': {
+    /* For <tei:note>s which have @target, create a link from the note to its target, 
+     * and likewise from the target to the note. */
     'note': 
       [
         ['[target]', function(elt) {
@@ -20,6 +22,8 @@ var ceteiceanBehaviors = {
               if ( allNotes[index].isEqualNode(elt) ) {
                 /* JS has zero-based indexes; add one for humans. */
                 noteIndex = index + 1;
+                /* Break out of the loop; there's no point in testing the remaining 
+                 * notes. */
                 break;
               }
             }

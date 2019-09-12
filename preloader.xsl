@@ -8,7 +8,15 @@
     The resulting HTML uses CETEIcean for display.
     
     Ashley M. Clark
-    2019-08-27
+    https://gist.github.com/amclark42/0a66f46718c75c3053a06e4b4933746c
+    
+    Changelog:
+    2019-09-12: Made sure CETEIcean registers and processes all XSL-made custom 
+      elements. Recreated some of the processing that CETEIcean does on @xml:id and
+      @xml:lang: the attributes get copied and their HTML equivalents (@id, @lang) 
+      are also added. Set serialization such that no whitespace is added for 
+      indentation purposes.
+    2019-08-27: Created this stylesheet.
   -->
   
   <xsl:output method="html" encoding="UTF-8" indent="no"/>
