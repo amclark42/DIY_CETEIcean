@@ -48,6 +48,18 @@
   <!--  TEMPLATES  -->
   
   <xsl:template match="/">
+    <xsl:variable name="els">
+        <xsl:text>[</xsl:text>
+        <xsl:for-each select="//*">
+            <xsl:text>"tei:</xsl:text>
+            <xsl:value-of select="local-name(.)"/>
+            <xsl:text>"</xsl:text>
+            <xsl:if test="not(position() = last())">
+                <xsl:text>, </xsl:text>
+            </xsl:if>
+        </xsl:for-each>
+        <xsl:text>]</xsl:text>
+    </xsl:variable>
     <html lang="en">
       <head>
         <title><xsl:value-of select="$document-title"/></title>
