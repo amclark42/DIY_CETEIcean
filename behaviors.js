@@ -2,6 +2,8 @@
 
 var ceteiceanBehaviors = {
   'handlers': {
+    /* Override the CETEIcean so it doesn't hide the <tei:teiHeader>. */
+    'teiHeader': [],
     /* For <tei:note>s which have @target, create a link from the note to its target, 
      * and likewise from the target to the note. */
     'note': 
