@@ -1,4 +1,10 @@
-/* Place project-specific CSS here */
+/*  Styles which depend on the behaviors added to CETEIcean in behaviors.js.  */
+
+/* Use the default text size for the document title, since styles on <h1> will 
+   increase it. */
+tei-titleStmt > tei-title:first-of-type { font-size: inherit; }
+
+/* Styling for links between notes and the content annotated by them. */
 .link-to-note {}
 .link-from-note {
   float: left;
@@ -6,3 +12,7 @@
   margin-right: 0.5em;
   font-size: 0.95em;
 }
+
+
+/*  Place custom styling rules below.  */
+

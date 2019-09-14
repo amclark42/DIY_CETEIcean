@@ -4,10 +4,13 @@ var ceteiceanBehaviors = {
   'handlers': {
     /* Override default CETEIcean behavior so it doesn't hide the <tei:teiHeader>. */
     'teiHeader': [],
+    /* Wrap the document's primary title in an <h1>. */
+    'title': [
+        ['tei-titleStmt > tei-title:first-of-type', ['<h1>','</h1>']]
+      ],
     /* For <tei:note>s which have @target, create a link from the note to its target, 
      * and likewise from the target to the note. */
-    'note': 
-      [
+    'note': [
         ['[target]', function(elt) {
             var noteId = elt.id,
                 contentIdref = elt.getAttribute("target"),
@@ -24,7 +27,7 @@ var ceteiceanBehaviors = {
               if ( allNotes[index].isEqualNode(elt) ) {
                 /* JS has zero-based indexes; add one for humans. */
                 noteIndex = index + 1;
-                /* Break out of the loop; there's no point in testing the remaining 
+                /* Break out of the loop; there's no point in testing any remaining 
                  * notes. */
                 break;
               }
