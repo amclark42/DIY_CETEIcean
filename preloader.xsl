@@ -12,6 +12,9 @@
     https://gist.github.com/amclark42/0a66f46718c75c3053a06e4b4933746c
     
     Changelog:
+    2020-08-16: Refactored the in-document Javascript to reflect updates in newer
+      CETEIcean releases (v1.0.0 and above). Moved the CETEIcean Javascript code 
+      into a global variable for maintainability. Added more JS and XML comments.
     2019-09-14: Added DOCTYPE and output serialization parameters for HTML5. Moved 
       CSS and JS declarations into a parameter so they are explicitly marked out for 
       customization. Further recreated bits of CETEIcean's domToHTML5() function: 
@@ -30,7 +33,25 @@
   <xsl:output encoding="UTF-8" indent="no" method="html" version="5.0"/>
   
   
- <!--  PARAMETERS (aka, customizable values)  -->
+ <!--
+    PARAMETERS (customizable values)
+   -->
+  
+  <!-- The title of the HTML document, which will be displayed as the name of the 
+    tab or window. By default, this stylesheet will try to use the first TEI <title> 
+    inside <titleStmt>. -->
+  <xsl:param name="document-title">
+    <xsl:variable name="teiTitle" 
+      select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[1]"/>
+    <xsl:choose>
+      <xsl:when test="$teiTitle">
+        <xsl:value-of select="normalize-space($teiTitle)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>CETEIcean</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:param>
   
   <!-- The path to the directory where the web assets (CSS, JS, etc.) are stored. By 
     default, this stylesheet assumes that web assets are stored in the same 
@@ -45,25 +66,42 @@
     <link rel="stylesheet" href="{$assets-path}/custom.css" />
   </xsl:param>
   
-  <!-- The title of the HTML document, which will be displayed as the name of the 
-    tab or window. By default, this stylesheet will try to use the TEI <title> in 
-    the <titleStmt>. -->
-  <xsl:param name="document-title">
-    <xsl:variable name="teiTitle" 
-      select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[1]"/>
-    <xsl:choose>
-      <xsl:when test="$teiTitle">
-        <xsl:value-of select="normalize-space($teiTitle)"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:text>CETEIcean</xsl:text>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:param>
+  <!-- Whether to include debugging messages, in both XSLT and Javascript. -->
+  <xsl:param name="debug" select="false()"/>
   
   
- <!--  TEMPLATES  -->
+ <!--
+    VARIABLES
+   -->
   
+  <!-- Plain-text Javascript which, in a browser, will start CETEIcean. The code 
+    expects to be run from an HTML document with TEI-based custom elements.
+    
+    I've placed this code at the top of the stylesheet for maintainability purposes. -->
+  <xsl:variable name="ceteicean-startup-js">
+    <xsl:text>
+    /* Initialize an instance of the CETEI class. */
+    var CETEIcean = new CETEI(</xsl:text><xsl:if test="$debug = true()">
+          <!-- If the "debug" parameter is toggled on, turn on CETEIcean debugging 
+            messages. -->
+          <xsl:text>{'debug': true}</xsl:text>
+        </xsl:if><xsl:text>);
+        /* List out all the tag names from this XML document. */
+        tagsDef = new Set(</xsl:text><xsl:call-template name="list-tags"/><xsl:text>);
+    /* Add any customizations from a variable named "ceteiceanBehaviors". */
+    if ( ceteiceanBehaviors !== undefined ) {
+      CETEIcean.addBehaviors(ceteiceanBehaviors);
+    }
+    /* Register the new HTML custom elements with CETEIcean. */
+    CETEIcean.define(tagsDef);</xsl:text>
+  </xsl:variable>
+  
+  
+ <!--
+    TEMPLATES
+   -->
+  
+  <!-- Build an HTML shell around the transformed TEI document. -->
   <xsl:template match="/">
     <xsl:call-template name="test-html5-output-support"/>
     <html>
@@ -90,16 +128,16 @@
         <div id="TEI">
           <xsl:apply-templates/>
         </div>
-        <script><xsl:text>
-          var xmlDoc = document.getElementById('TEI'),
-              CETEIcean = new CETEI(xmlDoc);
-          CETEIcean.els = new Set(</xsl:text><xsl:call-template name="list-tags"/><xsl:text>);
-          if ( ceteiceanBehaviors !== undefined ) {
-            CETEIcean.addBehaviors(ceteiceanBehaviors);
-          }
-          CETEIcean.applyBehaviors();
-          console.log(document.querySelector('tei-TEI') instanceof HTMLElement);
-        </xsl:text></script>
+        <!-- Include Javascript code to initialize CETEIcean. -->
+        <script>
+          <xsl:copy-of select="$ceteicean-startup-js"/>
+          <!-- Debugging: check to see if the <tei-tei> element (previously <TEI>) 
+            registers as an HTML (custom) element. -->
+          <xsl:if test="$debug = true()">
+            <xsl:text>
+    console.log(document.querySelector('tei-TEI') instanceof HTMLElement);</xsl:text>
+          </xsl:if>
+        </script>
       </body>
     </html>
   </xsl:template>
@@ -157,7 +195,9 @@
   </xsl:template>
   
   
- <!--  SUBPROCESSES  -->
+ <!--
+    SUBPROCESSES (named templates)
+   -->
   
   <!-- Use the namespace of the current node to determine which prefix to use when 
     constructing custom HTML elements. The default prefix is "tei". -->
@@ -221,6 +261,5 @@
       <xsl:text>&#x0A;</xsl:text>
     </xsl:if>
   </xsl:template>
-
   
 </xsl:stylesheet>

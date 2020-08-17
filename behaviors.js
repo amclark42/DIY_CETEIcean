@@ -1,9 +1,14 @@
 // CETEIcean behaviors
 
+/* Definitions which tell CETEIcean how elements should be translated into HTML. See 
+ * the CETEIcean tutorial for more on how to implement your own behaviors: 
+ * https://github.com/TEIC/CETEIcean/blob/master/tutorial/README.md
+ */
 var ceteiceanBehaviors = {
-  'handlers': {
+  /* Custom behaviors for elements originally in the TEI namespace. */
+  'tei': {
     /* Override default CETEIcean behavior so it doesn't hide the <tei:teiHeader>. */
-    'teiHeader': [],
+    'teiHeader': null,
     /* Wrap the document's primary title in an <h1>. */
     'title': [
         ['tei-titleStmt > tei-title:first-of-type', ['<h1>','</h1>']]
@@ -14,7 +19,7 @@ var ceteiceanBehaviors = {
         ['[target]', function(elt) {
             var noteId = elt.id,
                 contentIdref = elt.getAttribute("target"),
-                contentId = contentIdref.replace(/^#/,''),
+                contentId = contentIdref.replace(/^#/, ''),
                 contentEl = document.getElementById(contentId),
                 linkToContent = document.createElement('a'),
                 linkToNote = document.createElement('a'),
