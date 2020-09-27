@@ -1,0 +1,97 @@
+/*
+  General CSS rules for CETEIcean
+  
+  Stylesheet adapted from TAPAS Generic:
+  https://github.com/NEU-DSG/tapas-generic
+ */
+ 
+html {
+  font-family: "Times New Roman", serif;
+  padding: 0;
+}
+html > body {
+  margin: 0 2em;
+}
+
+/*
+  TEI-encoded XML as custom HTML elements
+ */
+tei-tei {
+  display: flex;
+  flex-direction: column;
+}
+tei-teiheader > * { display: none; }
+tei-teiheader > tei-filedesc { display: block; }
+tei-text { margin: 1em 0; }
+
+/* Elements that should generally display as blocks */
+tei-accmat, tei-acquisition, tei-additional, tei-addrline, address, tei-admininfo, 
+tei-app, tei-argument, tei-biblfull, tei-biblstruct tei-bindingdesc, tei-byline, 
+tei-cb, tei-dateline, tei-docauthor, tei-docdate, tei-docedition, tei-docimprint, 
+tei-doctitle, tei-l, tei-lg, tei-provenance, tei-docimprint tei-pubplace, tei-quote, 
+tei-re, tei-respstmt, tei-samplingdecl, tei-sense, tei-setting, tei-source, 
+tei-sponsor {
+  display: block;
+}
+
+tei-p > tei-quote { display: inline; }
+
+/* Elements that should display as blocks with a 1em margin on the top and bottom */
+tei-ab, tei-caption, tei-castgroup, tei-cit, tei-climate, tei-collation, tei-colophon, 
+tei-condition, tei-custodialhist, tei-mscontents, tei-p, tei-performance, tei-person, 
+tei-persongrp, tei-recordhist, tei-scriptnote, tei-sealdesc, tei-stamp {
+  display: block;
+  margin: 1em 0;
+}
+
+/* Elements that should generally be hidden */
+tei-crefpattern, tei-encodingdesc, tei-graphic, tei-node, tei-surplus, tei-textclass {
+  display: none;
+}
+
+/*
+  Elements that should be emphasized or set apart in some way
+ */
+tei-emph, tei-ovar, tei-sound, tei-view {
+  font-style: italic;
+}
+tei-origplace, tei-principal, tei-remarks {
+  font-weight: bold;
+}
+tei-head {
+  display: inline-block;
+  font-size: 1.65em;
+  margin: 1.25em 0 0.5em;
+}
+
+/*
+  Elements with break behaviors
+ */
+tei-lb:after {
+  content: '\a';
+  white-space: pre;
+}
+
+/*
+  Tables
+ */
+table, tei-table {
+  border-collapse: collapse;
+  display: table;
+  margin: 2em 10%;
+  width: 80%;
+}
+tei-table > tei-head {
+  display: table-caption;
+}
+tei-table *[role='label'] {
+  font-weight: bold;
+}
+tei-table tei-row {
+  display: table-row;
+}
+tei-table tei-cell {
+  border: medium solid darkgray;
+  display: table-cell;
+  padding: 0.5rem 1rem;
+}

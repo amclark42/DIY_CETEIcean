@@ -1,10 +1,4 @@
 /*
-  General CSS rules
- */
-html { padding: 0; }
-html > body { margin: 0 2em; }
-
-/*
   Styles which depend on the behaviors added to CETEIcean in behaviors.js.
  */
 

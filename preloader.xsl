@@ -62,7 +62,7 @@
   <xsl:param name="web-assets">
     <script src="{$assets-path}/CETEI.js" />
     <script src="{$assets-path}/behaviors.js" />
-    <link rel="stylesheet" href="{$assets-path}/CETEIcean.css" />
+    <link rel="stylesheet" href="{$assets-path}/simple.css" />
     <link rel="stylesheet" href="{$assets-path}/custom.css" />
   </xsl:param>
   
