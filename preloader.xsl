@@ -62,8 +62,8 @@
   <xsl:param name="web-assets">
     <script src="{$assets-path}/CETEI.js" />
     <script src="{$assets-path}/behaviors.js" />
-    <link rel="stylesheet" href="{$assets-path}/simple.css" />
-    <link rel="stylesheet" href="{$assets-path}/custom.css" />
+    <link rel="stylesheet" href="{$assets-path}/basic-styles.css" />
+    <link rel="stylesheet" href="{$assets-path}/custom-styles.css" />
   </xsl:param>
   
   <!-- Whether to include debugging messages, in both XSLT and Javascript. -->
