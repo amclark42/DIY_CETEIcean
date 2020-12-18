@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/preloader.xsl"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>This is a sample document</title>
+      </titleStmt>
+      <publicationStmt>
+        <p></p>
+      </publicationStmt>
+      <sourceDesc>
+        <p></p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <tagsDecl partial="true">
+        <rendition scheme="css"></rendition>
+      </tagsDecl>
+    </encodingDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <head>This is a sample document</head>
+      <div>
+        <p>Para<lb/>graph</p>
+        
+        <table>
+          <head>This is a title for this table</head>
+          <row role="label">
+            <cell>l 1</cell>
+            <cell>l 2</cell>
+          </row>
+          <row>
+            <cell role="label">l 3</cell>
+            <cell>3</cell>
+          </row>
+          <row>
+            <cell role="label">l 4</cell>
+            <cell>4</cell>
+          </row>
+          <row>
+            <cell role="label">l 5</cell>
+            <cell>5</cell>
+          </row>
+        </table>
+      </div>
+    </body>
+  </text>
+</TEI>
