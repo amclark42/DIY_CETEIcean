@@ -56,7 +56,7 @@
   <!-- The path to the directory where the web assets (CSS, JS, etc.) are stored. By 
     default, this stylesheet assumes that web assets are stored in a directory named 
     "lib". -->
-  <xsl:param name="assets-path" select="'./lib'"/>
+  <xsl:param name="assets-path" select="'./assets'"/>
   
   <!-- Web assets (CSS, Javascript) which should be included in the HTML output. -->
   <xsl:param name="web-assets">
