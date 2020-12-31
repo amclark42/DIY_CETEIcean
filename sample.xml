@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="assets/preloader.xsl"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en-US">
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>This is a sample document</title>
+        <title>This is a sample document: TEI</title>
       </titleStmt>
       <publicationStmt>
         <p></p>
@@ -23,27 +23,41 @@
     <body>
       <head>This is a sample document</head>
       <div>
-        <p>Para<lb/>graph</p>
-        
-        <table>
-          <head>This is a title for this table</head>
-          <row role="label">
-            <cell>l 1</cell>
-            <cell>l 2</cell>
-          </row>
-          <row>
-            <cell role="label">l 3</cell>
-            <cell>3</cell>
-          </row>
-          <row>
-            <cell role="label">l 4</cell>
-            <cell>4</cell>
-          </row>
-          <row>
-            <cell role="label">l 5</cell>
-            <cell>5</cell>
-          </row>
-        </table>
+        <p>Para-<lb/>graph</p>
+        <pb/>
+        <div>
+          <head>Quotes</head>
+          <epigraph>
+            <quote>DIY is a great way to learn by doing. I’m totally obsessed with 
+              it.</quote>
+            <bibl>Maggie, <title>Animal Crossing: New Horizons</title></bibl>
+          </epigraph>
+          <p><quote>DIY is a great way to learn by doing. I’m totally obsessed with 
+            it,</quote> according to Maggie, a villager character from <title>Animal 
+            Crossing: New Horizons</title>.</p>
+        </div>
+        <pb/>
+        <div>
+          <table>
+            <head>This is a table heading</head>
+            <row role="label">
+              <cell>l 1</cell>
+              <cell>l 2</cell>
+            </row>
+            <row>
+              <cell role="label">l 3</cell>
+              <cell>3</cell>
+            </row>
+            <row>
+              <cell role="label">l 4</cell>
+              <cell>4</cell>
+            </row>
+            <row>
+              <cell role="label">l 5</cell>
+              <cell>5</cell>
+            </row>
+          </table>
+        </div>
       </div>
     </body>
   </text>
