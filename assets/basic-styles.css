@@ -7,11 +7,16 @@
  
 html {
   color: #292929;
-  font-family: Garamond, Times New Roman, Times;
+  font-family: Garamond, "Times New Roman", Times;
   padding: 0;
 }
 html > body {
-  margin: 0 2em;
+  padding: 0 0.5em;
+}
+@media screen and (min-width: 800px) {
+  html > body {
+    padding: 0 15%;
+  }
 }
 
 /*
