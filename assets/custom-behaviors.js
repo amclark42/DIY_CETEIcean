@@ -13,7 +13,7 @@ var ceteiceanBehaviors = {
     
     /* Wrap the document's primary title in an <h1>. */
     'title': [
-        ['tei-titleStmt > tei-title:first-of-type', ['<h1>','</h1>']]
+        ['tei-titlestmt > tei-title:first-of-type', ['<h1>','</h1>']]
       ],
     
     /* Block-level things. Use semantic HTML markup where possible for accessibility 

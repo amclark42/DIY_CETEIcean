@@ -61,7 +61,7 @@
   <!-- Web assets (CSS, Javascript) which should be included in the HTML output. -->
   <xsl:param name="web-assets">
     <script src="{$assets-path}/CETEI.js" />
-    <script src="{$assets-path}/behaviors.js" />
+    <script src="{$assets-path}/custom-behaviors.js" />
     <link rel="stylesheet" href="{$assets-path}/basic-styles.css" />
     <link rel="stylesheet" href="{$assets-path}/custom-styles.css" />
   </xsl:param>
