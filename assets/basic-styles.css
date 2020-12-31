@@ -6,11 +6,17 @@
  */
  
 html {
-  font-family: "Times New Roman", serif;
+  color: #292929;
+  font-family: Garamond, "Times New Roman", Times;
   padding: 0;
 }
 html > body {
-  margin: 0 2em;
+  padding: 0 0.5em;
+}
+@media screen and (min-width: 800px) {
+  html > body {
+    padding: 0 15%;
+  }
 }
 
 /*
@@ -34,8 +40,6 @@ tei-sponsor {
   display: block;
 }
 
-tei-p > tei-quote { display: inline; }
-
 /* Elements that should display as blocks with a 1em margin on the top and bottom */
 tei-ab, tei-caption, tei-castgroup, tei-cit, tei-climate, tei-collation, tei-colophon, 
 tei-condition, tei-custodialhist, tei-mscontents, tei-p, tei-performance, tei-person, 
@@ -58,18 +62,42 @@ tei-emph, tei-ovar, tei-sound, tei-view {
 tei-origplace, tei-principal, tei-remarks {
   font-weight: bold;
 }
+
+/*
+  Breaks and beginnings
+ */
+tei-lb:after, tei-pb:after {
+  content: '\a';
+  white-space: pre;
+}
+
+/*
+  Headings
+ */
+tei-titlestmt > tei-title {
+  font-size: 2em;
+}
 tei-head {
-  display: inline-block;
-  font-size: 1.65em;
+  display: block;
+  font-size: 1.75em;
+  font-weight: normal;
   margin: 1.25em 0 0.5em;
 }
 
 /*
-  Elements with break behaviors
+  Quotes
  */
-tei-lb:after {
-  content: '\a';
-  white-space: pre;
+tei-p tei-q, tei-p tei-quote, tei-p tei-socalled {
+  display: inline;
+}
+tei-q, tei-quote, tei-socalled {
+  quotes: "\201c" "\201d" "\2018" "\2019" "\201c" "\201d" "\2018" "\2019";
+}
+tei-q:before, tei-quote:before, tei-socalled:before {
+  content: open-quote;
+}
+tei-q:after, tei-quote:after, tei-socalled:after {
+  content: close-quote;
 }
 
 /*
