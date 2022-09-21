@@ -7,8 +7,12 @@
  
 html {
   color: #292929;
-  font-family: Garamond, "Times New Roman", Times;
+  font-family: Georgia,Palatino,'Palatino Linotype','Times New Roman',serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
   padding: 0;
+  /* CSS custom variables */
+  --en-quotes: "\201c" "\201d" "\2018" "\2019" "\201c" "\201d" "\2018" "\2019";
 }
 html > body {
   padding: 0 0.5em;
@@ -35,14 +39,13 @@ tei-accmat, tei-acquisition, tei-additional, tei-addrline, address, tei-admininf
 tei-app, tei-argument, tei-biblfull, tei-biblstruct tei-bindingdesc, tei-byline, 
 tei-cb, tei-dateline, tei-docauthor, tei-docdate, tei-docedition, tei-docimprint, 
 tei-doctitle, tei-l, tei-lg, tei-provenance, tei-docimprint tei-pubplace, tei-quote, 
-tei-re, tei-respstmt, tei-samplingdecl, tei-sense, tei-setting, tei-source, 
-tei-sponsor {
+tei-re, tei-samplingdecl, tei-sense, tei-setting, tei-source, tei-sponsor {
   display: block;
 }
 
 /* Elements that should display as blocks with a 1em margin on the top and bottom */
 tei-ab, tei-caption, tei-castgroup, tei-cit, tei-climate, tei-collation, tei-colophon, 
-tei-condition, tei-custodialhist, tei-mscontents, tei-p, tei-performance, tei-person, 
+tei-condition, tei-custodialhist, tei-epigraph, tei-mscontents, tei-p, tei-performance, tei-person, 
 tei-persongrp, tei-recordhist, tei-scriptnote, tei-sealdesc, tei-stamp {
   display: block;
   margin: 1em 0;
@@ -91,7 +94,7 @@ tei-p tei-q, tei-p tei-quote, tei-p tei-socalled {
   display: inline;
 }
 tei-q, tei-quote, tei-socalled {
-  quotes: "\201c" "\201d" "\2018" "\2019" "\201c" "\201d" "\2018" "\2019";
+  quotes: --en-quotes;
 }
 tei-q:before, tei-quote:before, tei-socalled:before {
   content: open-quote;
@@ -99,6 +102,29 @@ tei-q:before, tei-quote:before, tei-socalled:before {
 tei-q:after, tei-quote:after, tei-socalled:after {
   content: close-quote;
 }
+
+/* Citations and epigraphs */
+tei-cit, tei-epigraph {
+  margin: 1rem 1rem 2rem;
+}
+tei-cit > tei-bibl,
+tei-epigraph > tei-bibl {
+  display: block;
+  margin: 0.5em 1em 1.5em;
+}
+tei-cit > tei-bibl:before,
+tei-epigraph > tei-bibl:before {
+  content: '—';
+}
+tei-cit > tei-q:before, tei-cit > tei-quote:before,
+tei-epigraph > tei-q:before, tei-epigraph > tei-quote:before {
+  content: none;
+}
+tei-cit > tei-q:after, tei-cit > tei-quote:after,
+tei-epigraph > tei-q:after, tei-epigraph > tei-quote:after {
+  content: none;
+}
+
 
 /*
   Tables
@@ -122,4 +148,48 @@ tei-table tei-cell {
   border: medium solid darkgray;
   display: table-cell;
   padding: 0.5rem 1rem;
+}
+
+/*
+  Miscellaneous
+ */
+/* Empty date elements  */
+tei-date:empty {
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+}
+tei-date:empty[when]:before {
+  content: attr(when);
+}
+tei-date:empty[from]:before,
+tei-date:empty[to]:before {
+  content: attr(from)'–'attr(to);
+}
+
+tei-gap:before {
+  content: '...';
+  display: inline;
+}
+
+tei-said {
+  quotes: --en-quotes;
+}
+tei-said:before {
+  content: open-quote;
+}
+tei-said:after {
+  content: close-quote;
+}
+
+tei-speaker {
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+tei-speaker:after {
+  content: ': ';
+}
+
+tei-title {
+  font-style: italic;
 }
